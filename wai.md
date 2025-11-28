@@ -150,6 +150,12 @@ struct KernelResponse {
 } where resp_type == 0 <=> typeof(resp) == i32, resp_type == 1 <=> typeof(resp) == f32;
 
 impl KernelHandle {
+    // This function is does something a little weird:
+    // - Take a reference to potentially uninitialized data
+    // - If a response is ready then write the response into that reference
+    // - Otherwise write nothing
+    // - Return a bool to the caller which is true iff the data is now valid.
+    //
 	// This function implements somewhat of an antipattern as you should just
 	// use an option, but sometimes you don't have the luxury of doing so (we
 	// may be interfacing with foreign code or implementing something very low 
