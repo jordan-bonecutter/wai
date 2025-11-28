@@ -199,7 +199,6 @@ things wrong with it but it gets the point across and also introduces the
 concept of planes which is very important to how Wai proves memory safety.
 
 ```rust
-// A vec is 3 fields.
 struct Vec<T, A=std::DefaultAllocator> {
 	len: isize,
 	cap: isize,
