@@ -221,7 +221,7 @@ impl Vec<T, A> {
     // The above where clause helps us safely index into the array at compile
     // time.
 	
-	fn index(&read self, index: isize) -> &T {
+	fn index(&read self, index: isize) -> (ret &T) where plane(*ret) == self.data {
 		return &self.data[index];
 	} where index >= 0 && index < self.len;
     // this function can only be called if you can prove the index is between
@@ -269,7 +269,7 @@ impl Vec<T, A> {
 		}
 
 		return None;
-	}
+	} where plane(*Some(ret)) == self.data;
 
     fn drop(&self) {
         if self.cap > 0 {
